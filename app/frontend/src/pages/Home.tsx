@@ -11,6 +11,13 @@ import {
 } from '@ionic/react';
 
 import { campeonatoMock } from '../../../domain/services/mockCampeonato';
+import {
+  IonList,
+  IonItem,
+  IonLabel,
+} from '@ionic/react';
+
+import { categoriasMock } from '../../../domain/services/mockCategorias';
 
 const Home: React.FC = () => {
   const campeonato = campeonatoMock;
@@ -34,6 +41,17 @@ const Home: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </IonContent>
+      <IonList>
+  {categoriasMock.map((categoria) => (
+    <IonItem key={categoria.id}>
+      <IonLabel>
+        <h2>{categoria.nombre}</h2>
+        <p>Vueltas: {categoria.vueltas}</p>
+      </IonLabel>
+    </IonItem>
+  ))}
+</IonList>
+
     </IonPage>
   );
 };
