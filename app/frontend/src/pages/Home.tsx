@@ -9,6 +9,8 @@ import {
   IonCardTitle,
   IonCardContent,
 } from '@ionic/react';
+import { equiposMock } from '../../../domain/services/mockEquipos';
+
 
 import { campeonatoMock } from '../../../domain/services/mockCampeonato';
 import {
@@ -21,7 +23,8 @@ import { categoriasMock } from '../../../domain/services/mockCategorias';
 
 const Home: React.FC = () => {
   const campeonato = campeonatoMock;
-
+const equiposPorCategoria = (categoriaId: string) =>
+    equiposMock.filter((equipo) => equipo.categoriaId === categoriaId);
   return (
     <IonPage>
       <IonHeader>
@@ -41,16 +44,23 @@ const Home: React.FC = () => {
           </IonCardContent>
         </IonCard>
       </IonContent>
-      <IonList>
+     <IonList>
   {categoriasMock.map((categoria) => (
     <IonItem key={categoria.id}>
       <IonLabel>
         <h2>{categoria.nombre}</h2>
         <p>Vueltas: {categoria.vueltas}</p>
+
+        <ul>
+          {equiposPorCategoria(categoria.id).map((equipo) => (
+            <li key={equipo.id}>{equipo.nombre}</li>
+          ))}
+        </ul>
       </IonLabel>
     </IonItem>
   ))}
 </IonList>
+
 
     </IonPage>
   );
